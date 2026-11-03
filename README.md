@@ -431,3 +431,129 @@ Successfully captured and analyzed a TCP three-way handshake using Wireshark and
 Conclusion
 
 Successfully captured and analyzed DNS query and response packets using Wireshark and Kali Linux. Demonstrated practical understanding of DNS resolution, UDP port 53, and network packet analysis.
+
+Lab 05: HTTP and HTTPS Traffic Analysis
+
+Objective
+
+Capture and compare HTTP and HTTPS network traffic to understand how TLS encryption protects web communications.
+
+Tools Used
+
+Kali Linux (WSL)
+
+Wireshark
+
+Python 3 HTTP Server
+
+curl
+
+Commands Used
+
+Start the local HTTP server:
+
+python3 -m http.server 9090 --bind 127.0.0.1
+
+Generate HTTP traffic:
+
+curl -v http://127.0.0.1:9090
+
+Generate HTTPS traffic:
+
+curl -v --http1.1 https://example.com -o /dev/null
+
+Wireshark Filters
+
+HTTP capture:
+
+tcp.port == 9090
+
+HTTPS capture:
+
+tcp.port == 443 || tls
+
+Lab Procedure
+
+Started a local Python HTTP server on port 9090.
+
+Captured HTTP traffic using Wireshark's loopback (lo) interface.
+
+Identified the HTTP GET request and HTTP 200 OK response.
+
+Captured HTTPS traffic using the eth0 interface.
+
+Identified the TCP handshake, TLS Client Hello, Server Hello, and encrypted application data.
+
+Compared visible HTTP information with TLS-protected HTTPS communication.
+
+Results
+
+Feature
+
+HTTP
+
+HTTPS
+
+Test destination
+
+127.0.0.1
+
+example.com
+
+Port
+
+9090
+
+443
+
+Transport
+
+TCP
+
+TCP
+
+Encryption
+
+None
+
+TLS 1.3
+
+Request visibility
+
+HTTP GET visible
+
+HTTP request encrypted
+
+Response visibility
+
+HTTP 200 OK visible
+
+HTTP response encrypted
+
+Capture interface
+
+lo
+
+eth0
+
+Security Findings
+
+Unencrypted HTTP exposes application-layer requests and responses to network observers.
+
+HTTPS uses TLS to protect HTTP content during transmission.
+
+TLS 1.3 provides encryption and integrity protection for application data.
+
+Some connection metadata, such as IP addresses and certain TLS handshake information, may remain visible.
+
+Wireshark can help analysts identify insecure protocols and investigate network communication patterns.
+
+Evidence
+
+HTTP_Traffic_Lab.pcapng
+
+HTTPS_TLS_Traffic_Lab.pcapng
+
+Conclusion
+
+Successfully captured and compared HTTP and HTTPS traffic using Wireshark and Kali Linux. Demonstrated practical understanding of HTTP requests, server responses, TLS 1.3, and encrypted network communications.
