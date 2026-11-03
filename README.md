@@ -1117,3 +1117,133 @@ TCP_Performance_Analysis_Lab.pcapng
 Conclusion
 
 Successfully analyzed TCP network performance using Kali Linux and Wireshark. Demonstrated the ability to evaluate HTTP response times, inspect TCP acknowledgments, measure round-trip time, and identify retransmission indicators. The baseline capture showed reliable localhost communication without detected retransmissions.
+
+Lab 11: Network Traffic Anomaly Detection Using Wireshark
+
+Objective
+
+Identify and investigate unusual TCP connection patterns using Wireshark and Nmap. Analyze rapid port-scanning activity, TCP SYN packets, and reset responses to understand how SOC analysts detect potential network reconnaissance.
+
+Tools Used
+
+Kali Linux (WSL)
+
+Wireshark
+
+Nmap
+
+TCP/IP
+
+Python HTTP Server
+
+Commands Used
+
+Check Network Interfaces
+
+ip -br addr
+
+Verify HTTP Server
+
+sudo ss -ltnp | grep ':8080'
+
+Generate Controlled Port-Scanning Traffic
+
+nmap -sT -p 8000-8100 127.0.0.1
+
+Wireshark TCP Filter
+
+tcp
+
+Identify TCP SYN Packets
+
+tcp.flags.syn == 1 && tcp.flags.ack == 0
+
+Identify TCP Reset Packets
+
+tcp.flags.reset == 1
+
+Lab Procedure
+
+Verified Kali Linux network interfaces and the existing Python HTTP server.
+
+Started Wireshark and captured traffic on the loopback (lo) interface.
+
+Performed an authorized TCP connect scan against localhost using Nmap.
+
+Scanned 101 TCP ports ranging from 8000 to 8100.
+
+Analyzed rapid TCP SYN packets targeting multiple destination ports.
+
+Applied Wireshark display filters to identify TCP reset responses.
+
+Compared the responses from open and closed ports.
+
+Identified network reconnaissance indicators and documented the findings.
+
+Saved the packet capture for further investigation.
+
+Results
+
+Metric
+
+Result
+
+Target IP Address
+
+127.0.0.1
+
+Ports Scanned
+
+101
+
+Open Ports
+
+1 (8080)
+
+Closed Ports
+
+100
+
+Scan Duration
+
+0.04 seconds
+
+Total Packets Captured
+
+204
+
+TCP Reset Packets
+
+101
+
+Capture Interface
+
+lo (Loopback)
+
+Scan Type
+
+TCP Connect Scan (-sT)
+
+Security Findings
+
+Identified rapid TCP connection attempts across multiple destination ports.
+
+Observed SYN packets associated with network reconnaissance.
+
+Detected TCP reset responses from closed ports.
+
+Confirmed that port 8080 accepted a TCP connection.
+
+Distinguished closed-port reset responses from connection-termination resets.
+
+Demonstrated how Wireshark filters can support network anomaly detection.
+
+Conducted all scanning within an authorized localhost environment.
+
+Evidence
+
+Network_Anomaly_Detection_Lab.pcapng
+
+Conclusion
+
+Successfully analyzed controlled network reconnaissance activity using Nmap and Wireshark. Demonstrated the ability to identify unusual TCP connection patterns, investigate SYN and RST packets, distinguish open and closed ports, and recognize potential security events relevant to SOC monitoring and incident response.
