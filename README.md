@@ -557,3 +557,109 @@ HTTPS_TLS_Traffic_Lab.pcapng
 Conclusion
 
 Successfully captured and compared HTTP and HTTPS traffic using Wireshark and Kali Linux. Demonstrated practical understanding of HTTP requests, server responses, TLS 1.3, and encrypted network communications.
+
+Lab 06: Network Discovery and Enumeration Using Nmap
+
+Objective
+
+Identify open and closed TCP ports, detect running services, and document network exposure on an authorized local system.
+
+Tools Used
+
+Kali Linux (WSL)
+
+Nmap 7.99
+
+Python 3 HTTP Server
+
+Target
+
+IP Address: 127.0.0.1 (localhost)
+
+Scan Type: TCP Connect Scan and Service Version Detection
+
+Commands Used
+
+TCP Port Scan
+
+nmap -sT -p 22,80,443,8080,9090 127.0.0.1
+
+Service Version Detection
+
+nmap -sT -sV -p 22,80,443,8080,9090 127.0.0.1
+
+Save Scan Results
+
+nmap -sT -sV -p 22,80,443,8080,9090 127.0.0.1 -oN ~/Nmap-Network-Scanning-Labs/Nmap_Network_Enumeration.txt
+
+Results
+
+Port
+
+State
+
+Service
+
+Version
+
+22/TCP
+
+Closed
+
+SSH
+
+N/A
+
+80/TCP
+
+Closed
+
+HTTP
+
+N/A
+
+443/TCP
+
+Closed
+
+HTTPS
+
+N/A
+
+8080/TCP
+
+Open
+
+HTTP
+
+SimpleHTTPServer 0.6 (Python 3.14.7)
+
+9090/TCP
+
+Open
+
+HTTP
+
+SimpleHTTPServer 0.6 (Python 3.14.7)
+
+Security Findings
+
+The localhost target was reachable.
+
+Two TCP ports, 8080 and 9090, were open.
+
+Nmap identified Python HTTP servers running on both open ports.
+
+Ports 22, 80, and 443 were closed.
+
+Open ports represent potential network exposure, depending on service configuration and network accessibility.
+
+The scan was limited to the authorized local environment.
+
+Evidence
+
+Nmap_Network_Enumeration.txt
+
+Conclusion
+
+Successfully performed TCP port enumeration and service version detection using Nmap. This exercise demonstrated how security analysts identify active services, document exposed ports, and assess network configurations.
