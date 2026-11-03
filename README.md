@@ -755,3 +755,111 @@ ARP_Traffic_Lab.pcapng
 Conclusion
 
 Successfully captured and analyzed ARP communication using Wireshark and Kali Linux. Demonstrated understanding of local network address resolution and the security implications of unauthenticated ARP messages.
+
+Lab 08: Network Connectivity and Troubleshooting
+
+Objective
+
+Diagnose network connectivity and analyze ICMP, DNS, TCP, and TLS traffic using Kali Linux and Wireshark.
+
+Tools Used
+
+Kali Linux (WSL)
+
+Wireshark
+
+Ping
+
+Dig
+
+Curl
+
+Commands Used
+
+Test Network Connectivity
+
+ping -c 4 1.1.1.1
+
+Test DNS Resolution
+
+dig example.com
+
+Test HTTPS Connectivity
+
+curl -I --max-time 10 https://example.com
+
+Generate DNS Traffic for Wireshark
+
+dig @1.1.1.1 example.com
+
+Wireshark Display Filter
+
+icmp || dns || tcp.port == 443 || tls
+
+Lab Procedure
+
+Opened Kali Linux and tested network connectivity using ping.
+
+Verified DNS resolution using dig.
+
+Tested HTTPS connectivity using curl.
+
+Opened Wireshark and selected the eth0 interface.
+
+Applied display filters to identify ICMP, DNS, TCP, and TLS traffic.
+
+Captured and analyzed network communication.
+
+Results
+
+Test
+
+Result
+
+ICMP
+
+4 packets transmitted, 4 received
+
+Packet Loss
+
+0%
+
+Average Latency
+
+14.46 ms
+
+DNS Resolution
+
+Successful (NOERROR)
+
+HTTPS Response
+
+HTTP/2 200
+
+Capture Interface
+
+eth0
+
+Protocols Captured
+
+ICMP, DNS, TCP, TLS
+
+Security Findings
+
+Successfully verified IP connectivity with no packet loss.
+
+Confirmed that DNS resolution was functioning correctly.
+
+Identified TCP connection establishment and TLS 1.3 traffic.
+
+Demonstrated how Wireshark can help investigate network connectivity problems.
+
+Network traffic analysis can assist cybersecurity analysts in detecting unusual communication patterns.
+
+Evidence
+
+Network_Troubleshooting_Lab.pcapng
+
+Conclusion
+
+Successfully performed network connectivity testing and packet analysis using Kali Linux and Wireshark. Demonstrated practical troubleshooting skills involving ICMP, DNS, TCP, and TLS protocols. 
