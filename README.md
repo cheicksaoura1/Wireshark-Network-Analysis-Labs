@@ -663,3 +663,95 @@ Nmap_Network_Enumeration.txt
 Conclusion
 
 Successfully performed TCP port enumeration and service version detection using Nmap. This exercise demonstrated how security analysts identify active services, document exposed ports, and assess network configurations.
+
+Lab 07: ARP Protocol Analysis Using Wireshark
+
+Objective
+
+Capture and analyze Address Resolution Protocol (ARP) traffic to understand how IPv4 addresses are mapped to MAC addresses on a local network.
+
+Tools Used
+
+Kali Linux (WSL)
+
+Wireshark
+
+Linux networking utilities
+
+Network Configuration
+
+Setting
+
+Value
+
+Interface
+
+eth0
+
+Kali IP Address
+
+172.17.118.185
+
+Default Gateway
+
+172.17.112.1
+
+Kali MAC Address
+
+00:15:5d:96:42
+
+Gateway MAC Address
+
+00:15:5d:d0:1f
+
+Commands Used
+
+Identify the network interface:
+
+ip -4 addr show eth0
+
+Identify the default gateway:
+
+ip route
+
+Clear the cached gateway neighbor entry:
+
+sudo ip neigh flush 172.17.112.1 dev eth0
+
+Generate local network traffic:
+
+ping -c 4 172.17.112.1
+
+Wireshark Filter
+
+arp
+
+Results
+
+Successfully captured ARP request and reply packets on the eth0 interface.
+
+ARP Request:
+Who has 172.17.112.1? Tell 172.17.118.185
+
+ARP Reply:
+172.17.112.1 is at 00:15:5d:d0:1f:ec
+
+Security Findings
+
+ARP resolves IPv4 addresses to MAC addresses on the local network.
+
+ARP requests are commonly broadcast to discover a destination's MAC address.
+
+ARP replies provide the requested MAC address.
+
+ARP does not provide built-in authentication, making it susceptible to ARP spoofing and poisoning attacks.
+
+Wireshark can help identify unusual ARP activity during network investigations.
+
+Evidence
+
+ARP_Traffic_Lab.pcapng
+
+Conclusion
+
+Successfully captured and analyzed ARP communication using Wireshark and Kali Linux. Demonstrated understanding of local network address resolution and the security implications of unauthenticated ARP messages.
