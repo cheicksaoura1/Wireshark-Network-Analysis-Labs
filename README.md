@@ -983,3 +983,137 @@ Network_Security_Analysis_Lab.pcapng
 Conclusion
 
 Successfully performed TCP port-scanning analysis using Nmap and Wireshark. Demonstrated the ability to identify open and closed ports, interpret TCP connection flags, and recognize network reconnaissance patterns relevant to security monitoring and incident investigation.
+
+Lab 10: TCP Retransmission and Network Performance Analysis Using Wireshark
+
+Objective
+
+Analyze TCP network performance by examining HTTP response times, TCP acknowledgments, round-trip time (RTT), and retransmissions using Wireshark in a controlled localhost environment.
+
+Tools Used
+
+Kali Linux (WSL)
+
+Wireshark
+
+Python HTTP Server
+
+Curl
+
+TCP/IP
+
+Commands Used
+
+Verify HTTP Server
+
+sudo ss -ltnp | grep ':8080'
+
+Generate HTTP Traffic
+
+for i in {1..10}; do curl -s -o /dev/null -w "Request $i: HTTP %{http_code} | Time %{time_total}s\n" http://127.0.0.1:8080/; done
+
+Wireshark TCP Filter
+
+tcp.port == 8080
+
+TCP Retransmission Filter
+
+tcp.analysis.retransmission || tcp.analysis.fast_retransmission
+
+TCP Round-Trip Time Filter
+
+tcp.port == 8080 && tcp.analysis.ack_rtt
+
+Lab Procedure
+
+Verified that the Python HTTP server was listening on localhost port 8080.
+
+Opened Wireshark and started capturing packets on the loopback (lo) interface.
+
+Generated 10 HTTP requests using Curl.
+
+Examined TCP connection establishment, HTTP GET requests, HTTP 200 responses, and TCP acknowledgments.
+
+Applied Wireshark filters to identify TCP retransmissions and fast retransmissions.
+
+Analyzed TCP acknowledgment round-trip time (RTT).
+
+Recorded network performance measurements.
+
+Saved the packet capture for further analysis.
+
+Results
+
+Metric
+
+Result
+
+Target IP Address
+
+127.0.0.1
+
+Target Port
+
+8080
+
+HTTP Requests
+
+10
+
+Successful Responses
+
+10
+
+HTTP Status
+
+200 OK
+
+Fastest HTTP Response
+
+0.001619 seconds
+
+Slowest HTTP Response
+
+0.010337 seconds
+
+Total Packets Captured
+
+120
+
+Packets Matching RTT Filter
+
+70
+
+Selected TCP ACK RTT
+
+44.941 microseconds
+
+Retransmissions Detected
+
+0
+
+Capture Interface
+
+lo (Loopback)
+
+Security Findings
+
+Confirmed successful HTTP communication over TCP.
+
+Observed TCP connection establishment and acknowledgment behavior.
+
+Identified no TCP retransmissions in the baseline capture.
+
+Measured TCP acknowledgment RTT using Wireshark.
+
+Demonstrated how packet analysis can support network performance troubleshooting.
+
+Established baseline measurements for future comparison with degraded network conditions.
+
+Evidence
+
+TCP_Performance_Analysis_Lab.pcapng
+
+Conclusion
+
+Successfully analyzed TCP network performance using Kali Linux and Wireshark. Demonstrated the ability to evaluate HTTP response times, inspect TCP acknowledgments, measure round-trip time, and identify retransmission indicators. The baseline capture showed reliable localhost communication without detected retransmissions.
