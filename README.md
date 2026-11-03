@@ -1247,3 +1247,64 @@ Network_Anomaly_Detection_Lab.pcapng
 Conclusion
 
 Successfully analyzed controlled network reconnaissance activity using Nmap and Wireshark. Demonstrated the ability to identify unusual TCP connection patterns, investigate SYN and RST packets, distinguish open and closed ports, and recognize potential security events relevant to SOC monitoring and incident response.
+
+Lab 12: SOC Incident Investigation and Network Reconnaissance Detection
+
+Objective
+
+Investigate simulated TCP port scanning activity using Kali Linux, Nmap, and Wireshark. Analyze network traffic and document findings in a professional SOC incident report.
+
+Tools Used
+
+Kali Linux (WSL)
+
+Wireshark
+
+Nmap
+
+Curl
+
+Python HTTP Server
+
+Commands
+
+sudo ss -ltnp | grep ':8080'
+curl -I http://127.0.0.1:8080/
+nmap -sT -p 8000-8100 127.0.0.1
+
+Wireshark Filters
+
+tcp.flags.syn == 1 && tcp.flags.ack == 0
+tcp.flags.reset == 1
+
+Results
+
+Confirmed the local HTTP server was listening on TCP port 8080.
+
+Received HTTP/1.0 200 OK from the server.
+
+Scanned TCP ports 8000–8100 on localhost.
+
+Identified one open port (8080) and 100 closed ports.
+
+Observed TCP SYN packets and RST/ACK responses in Wireshark.
+
+Security Findings
+
+Multiple connection attempts across different ports demonstrated simulated network reconnaissance.
+
+TCP reset responses helped identify closed ports.
+
+Compared legitimate HTTP communication with scanning activity.
+
+Classified the activity as an authorized security simulation, with no confirmed compromise.
+
+Evidence
+
+SOC Incident Investigation Report
+
+Wireshark packet capture of the simulated reconnaissance activity (saved locally).
+
+Conclusion
+
+Successfully performed a controlled SOC investigation, analyzed TCP scanning behavior, and documented network evidence and security recommendations.
