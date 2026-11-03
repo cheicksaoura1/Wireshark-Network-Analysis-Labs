@@ -314,6 +314,120 @@ Evidence
 
 DNS_Traffic_Lab.pcapng
 
+Lab 04: TCP Three-Way Handshake Analysis
+
+Objective
+
+Capture and analyze the TCP three-way handshake to understand how a client establishes a reliable connection with a server.
+
+Tools Used
+
+Kali Linux (WSL)
+
+Wireshark
+
+Python 3 HTTP Server
+
+curl
+
+Commands Used
+
+Start the local HTTP server:
+
+python3 -m http.server 9090 --bind 127.0.0.1
+
+Generate TCP traffic from another terminal:
+
+curl -v http://127.0.0.1:9090
+
+Wireshark display filter:
+
+tcp.port == 9090
+
+Lab Procedure
+
+Started a Python HTTP server on localhost using TCP port 9090.
+
+Opened Wireshark and selected the loopback (lo) interface.
+
+Applied the tcp.port == 9090 display filter.
+
+Generated a TCP connection using curl.
+
+Captured and examined the SYN, SYN-ACK, and ACK packets.
+
+Observed the HTTP request and successful server response.
+
+Results
+
+Packet
+
+TCP Flag / Protocol
+
+Description
+
+1
+
+SYN
+
+Client initiates TCP connection
+
+2
+
+SYN-ACK
+
+Server acknowledges and responds
+
+3
+
+ACK
+
+Client completes TCP handshake
+
+4
+
+HTTP GET
+
+Client requests a web resource
+
+8
+
+HTTP 200 OK
+
+Server successfully responds
+
+Network Details
+
+Client IP: 127.0.0.1
+
+Client TCP Port: 33988
+
+Server IP: 127.0.0.1
+
+Server TCP Port: 9090
+
+Capture Interface: Loopback (lo)
+
+Displayed Packets: 24
+
+Security Findings
+
+The TCP three-way handshake establishes a connection before application data is exchanged.
+
+SYN, SYN-ACK, and ACK flags identify the connection establishment process.
+
+TCP traffic analysis can help identify failed connections, unexpected resets, and suspicious connection attempts.
+
+Monitoring connection patterns can support network troubleshooting and security investigations.
+
+Evidence
+
+TCP_Three_Way_Handshake_Lab.pcapng
+
+Conclusion
+
+Successfully captured and analyzed a TCP three-way handshake using Wireshark and Kali Linux. Demonstrated practical understanding of TCP connection establishment, packet flags, and HTTP communication.
+
 Conclusion
 
 Successfully captured and analyzed DNS query and response packets using Wireshark and Kali Linux. Demonstrated practical understanding of DNS resolution, UDP port 53, and network packet analysis.
