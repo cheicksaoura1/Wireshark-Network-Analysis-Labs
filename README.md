@@ -224,3 +224,96 @@ Conclusion
 Successfully performed an authorized Nmap scan against a local HTTP server, identified an open TCP port, detected the running service, and saved the results for further analysis.
 
 Evidence: Nmap_HTTP_Scan.txt
+
+Lab 03: DNS Traffic Analysis Using Wireshark
+
+Objective
+
+Capture and analyze Domain Name System (DNS) queries and responses to understand how domain names are resolved into IP addresses.
+
+Tools Used
+
+Kali Linux (WSL)
+
+Wireshark
+
+DNS Utilities (dig)
+
+Cloudflare Public DNS (1.1.1.1)
+
+Commands Used
+
+dig example.com
+dig @1.1.1.1 example.com
+
+Lab Procedure
+
+Started Wireshark and selected the eth0 network interface.
+
+Applied the dns display filter.
+
+Generated a DNS query using the dig command.
+
+Queried Cloudflare's DNS server directly to capture visible DNS traffic.
+
+Identified and analyzed the DNS query and response packets.
+
+Results
+
+Field
+
+Observation
+
+DNS Query Packet
+
+104
+
+DNS Response Packet
+
+105
+
+Client IP Address
+
+172.17.118.185
+
+DNS Server
+
+1.1.1.1
+
+Domain Queried
+
+example.com
+
+Protocol
+
+UDP
+
+Destination Port
+
+53
+
+DNS Record Type
+
+A (IPv4)
+
+Resolved IP Addresses
+
+104.20.23.154, 172.66.147.243
+
+Security Findings
+
+DNS queries reveal the domain names that clients attempt to resolve.
+
+Standard unencrypted DNS traffic can be inspected using Wireshark.
+
+DNS responses provide IP addresses associated with requested domain names.
+
+DNS traffic analysis is useful for network troubleshooting and investigating suspicious domain activity.
+
+Evidence
+
+DNS_Traffic_Lab.pcapng
+
+Conclusion
+
+Successfully captured and analyzed DNS query and response packets using Wireshark and Kali Linux. Demonstrated practical understanding of DNS resolution, UDP port 53, and network packet analysis.
