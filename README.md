@@ -143,3 +143,84 @@ Network Troubleshooting and Traffic Investigation
 Disclaimer
 
 All packet captures were generated in an authorized local lab environment for educational and cybersecurity training purposes.
+
+
+Lab 02: Nmap Port Scanning and Service Detection
+
+Objective
+
+Perform a TCP port scan and service version detection using Nmap in Kali Linux to identify an active HTTP service on localhost.
+
+Tools Used
+
+Kali Linux (WSL)
+
+Nmap 7.99
+
+Python 3 HTTP Server
+
+Windows Terminal
+
+Lab Environment
+
+Target IP: 127.0.0.1
+
+Target Port: 8080/TCP
+
+Protocol: HTTP
+
+Environment: Localhost (authorized testing)
+
+Methodology
+
+1. Start a local HTTP server
+
+python3 -m http.server 8080 --bind 127.0.0.1
+
+2. Perform a TCP connect scan with service detection
+
+nmap -sT -sV -p 8080 127.0.0.1
+
+3. Save the scan results
+
+nmap -sT -sV -p 8080 127.0.0.1 -oN Nmap_HTTP_Scan.txt
+
+Scan Results
+
+Port
+
+State
+
+Service
+
+Version
+
+8080/TCP
+
+Open
+
+HTTP
+
+SimpleHTTPServer 0.6 (Python 3.14.7)
+
+Findings
+
+Nmap confirmed that the localhost host was reachable.
+
+TCP port 8080 was open.
+
+Service detection identified a Python HTTP server.
+
+The scan demonstrated how Nmap can identify accessible network services.
+
+Security Analysis
+
+Open ports indicate services that may be accessible to network clients. Identifying running services is an important step in network inventory, attack surface assessment, and security auditing.
+
+In this lab, the HTTP server was deliberately configured to listen on the loopback address, limiting direct network access to the local host.
+
+Conclusion
+
+Successfully performed an authorized Nmap scan against a local HTTP server, identified an open TCP port, detected the running service, and saved the results for further analysis.
+
+Evidence: Nmap_HTTP_Scan.txt
