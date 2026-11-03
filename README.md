@@ -863,3 +863,123 @@ Network_Troubleshooting_Lab.pcapng
 Conclusion
 
 Successfully performed network connectivity testing and packet analysis using Kali Linux and Wireshark. Demonstrated practical troubleshooting skills involving ICMP, DNS, TCP, and TLS protocols. 
+
+Lab 09: Network Security Analysis Using Wireshark and Nmap
+
+Objective
+
+Identify and analyze TCP port-scanning activity using Nmap and Wireshark. Compare the behavior of open and closed ports to understand how network reconnaissance can be detected through packet analysis.
+
+Tools Used
+
+Kali Linux (WSL)
+
+Wireshark
+
+Nmap
+
+Python HTTP Server
+
+TCP/IP
+
+Commands Used
+
+Check Network Interfaces
+
+ip -br addr
+
+Identify the Existing HTTP Server
+
+sudo ss -ltnp | grep ':8080'
+
+Perform TCP Connect Scan
+
+nmap -sT -p 8080,8081,8082,8083,8084 127.0.0.1
+
+Wireshark Display Filter
+
+tcp.port >= 8080 && tcp.port <= 8084
+
+Lab Procedure
+
+Opened Kali Linux and verified the network interfaces.
+
+Confirmed an existing Python HTTP server was listening on port 8080.
+
+Started Wireshark and selected the loopback (lo) interface.
+
+Performed a TCP connect scan against localhost using Nmap.
+
+Captured TCP connection attempts across ports 8080–8084.
+
+Analyzed TCP SYN, SYN-ACK, ACK, and RST-ACK packets.
+
+Identified open and closed ports based on their TCP responses.
+
+Saved the packet capture for further security analysis.
+
+Results
+
+Port
+
+Status
+
+Wireshark Evidence
+
+8080
+
+Open
+
+SYN → SYN-ACK → ACK
+
+8081
+
+Closed
+
+SYN → RST-ACK
+
+8082
+
+Closed
+
+SYN → RST-ACK
+
+8083
+
+Closed
+
+SYN → RST-ACK
+
+8084
+
+Closed
+
+SYN → RST-ACK
+
+Total Packets Captured: 12
+
+Target IP Address: 127.0.0.1
+
+Capture Interface: lo (Loopback)
+
+Security Findings
+
+Identified TCP port-scanning activity targeting multiple ports.
+
+Observed successful TCP connection establishment on port 8080.
+
+Detected TCP reset responses from closed ports 8081–8084.
+
+Demonstrated how repeated connection attempts can indicate network reconnaissance.
+
+Applied Wireshark display filters to isolate and investigate scanning activity.
+
+Conducted all testing within an authorized localhost lab environment.
+
+Evidence
+
+Network_Security_Analysis_Lab.pcapng
+
+Conclusion
+
+Successfully performed TCP port-scanning analysis using Nmap and Wireshark. Demonstrated the ability to identify open and closed ports, interpret TCP connection flags, and recognize network reconnaissance patterns relevant to security monitoring and incident investigation.
